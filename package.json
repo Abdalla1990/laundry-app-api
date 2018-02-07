@@ -1,0 +1,37 @@
+{
+    "name": "giver-trail",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node ./server/server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "engines": {
+        "node": "8.5.0"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": " "
+    },
+    "homepage": "",
+    "dependencies": {
+        "axios": "^0.16.2",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.18.2",
+        "express": "^4.16.2",
+        "google-elevation-api": "^1.0.0",
+        "googlemapsutil": "^0.1.7",
+        "jsonwebtoken": "^8.1.0",
+        "lodash": "^4.17.4",
+        "mongodb": "^2.2.5",
+        "mongoose": "^4.10.8",
+        "nodemon": "^1.12.1",
+        "validator": "^5.6.0"
+    }
+}

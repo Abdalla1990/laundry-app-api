@@ -1,0 +1,44 @@
+var { Mongoose } = require('./db/mongoose.js');
+const express = require('express');
+const { User } = require('./models/users');
+var bodyParser = require('body-parser');
+var app = express();
+var _ = require('lodash');
+const { ObjectID } = require('mongodb');
+const { authenticate } = require('./middleware/authenticate');
+const user_routes = require('./router/user_routes');
+const axios = require('axios');
+
+const port = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
+
+
+// ========== User Routes =================
+
+
+app.post('/users/login', user_routes.log_in);
+app.post('/users/create-user', user_routes.create_user);
+// get the user's info , for admin purposes 
+app.get('/users/:id', user_routes.get_user);
+//display all users
+app.get('/users', user_routes.display_users);
+// displays all necesary fields for user's profile
+app.get('/user/profile', authenticate, user_routes.user_profile);
+// update user's profile 
+app.put('/users/update-profile/', authenticate, user_routes.update_user);
+
+app.delete('/users/logout', authenticate, user_routes.log_out);
+
+//private
+app.post('/users-points-trail-trip', user_routes.users_points_trails_trips);
+
+app.post('/newTrip', authenticate, user_routes.newTrip);
+
+
+//=============== Trails routes =======================
+
+
+app.listen(port, () => {
+    console.log(`started up at port :${port}`)
+});
