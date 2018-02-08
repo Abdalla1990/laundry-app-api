@@ -39,7 +39,8 @@ var create_user = (req, res) => {
     }).then((token) => {
         res.header('x-auth', token).send(user);
     }).catch((err) => {
-        res.status(404).send(err.message);
+        res.status(400);
+        res.send(err.message);
         console.log('error',err.message);
     });
 
