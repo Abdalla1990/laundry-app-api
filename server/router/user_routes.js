@@ -128,7 +128,7 @@ var log_in = (req, res) => {
     User.findByCredentials(body.email, body.password).then((User) => {
 
         return User.generateAuthToken().then((token) => {
-            res.header('x-auth', token).send(User);
+            res.header('auth', token).send(User);
         });
 
 
