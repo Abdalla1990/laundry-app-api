@@ -16,16 +16,16 @@ app.use(bodyParser.json());
 
 var create_user = (req, res) => {
     console.log('inside the function');
-    var body = _.pick(req.body, ['email', 'password','password1', 'firstName', 'lastName']);
+    var body = _.pick(req.body, ['email', 'password','password1', 'firstName', 'lastName','role']);
     var body1 = {
         email: body.email,
         password: body.password,
         password1: body.password1,
         firstName: body.firstName,
         lastName: body.lastName,
-       
+        role : body.role
     }
-
+    console.log('the user details : ', body1);
     console.log(body)
     console.log(body1)
     var user = new User(body1);

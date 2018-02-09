@@ -28,6 +28,10 @@ var UserSchema = new mongoose.Schema({
         type: String,
         required: false,
         minlength: 6
+    },role:{
+        type:String,
+        required:true,
+        minlength: 3
     },
     firstName: {
         type: String,
@@ -52,6 +56,7 @@ var UserSchema = new mongoose.Schema({
         }
     }]
     
+    
 
 
 
@@ -61,7 +66,7 @@ var UserSchema = new mongoose.Schema({
 UserSchema.methods.toJSON = function() {
     var user = this;
     var userObject = user.toObject();
-    return _.pick(userObject, ['email', 'firstName', 'lastName']);
+    return _.pick(userObject, ['email', 'firstName', 'lastName','role']);
 };
 
 
