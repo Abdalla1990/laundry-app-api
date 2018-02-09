@@ -7,6 +7,7 @@ var _ = require('lodash');
 const { ObjectID } = require('mongodb');
 const { authenticate } = require('./middleware/authenticate');
 const user_routes = require('./router/user_routes');
+const admin_routes = require('./router/admin_routes');
 const axios = require('axios');
 
 const port = process.env.PORT || 3000;
@@ -34,6 +35,24 @@ app.delete('/users/logout', authenticate, user_routes.log_out);
 app.post('/users-points-trail-trip', user_routes.users_points_trails_trips);
 
 app.post('/newTrip', authenticate, user_routes.newTrip);
+
+// ========== Admin Routes =================
+
+
+app.post('/admin/login', admin_routes.log_in);
+app.post('/admin/create-admin', admin_routes.create_admin);
+// get the user's info , for admin purposes 
+app.get('/admin/:id', admin_routes.get_admin);
+//display all users
+app.get('/admin', admin_routes.display_admins);
+// displays all necesary fields for user's profile
+app.get('/admin/profile', authenticate, admin_routes.admin_profile);
+// update user's profile 
+app.put('/admin/update-profile/', authenticate, admin_routes.update_admin);
+
+app.delete('/admin/logout', authenticate, admin_routes.log_out);
+
+
 
 
 //=============== Trails routes =======================
