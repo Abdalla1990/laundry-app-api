@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var _ = require('lodash');
 const { ObjectID } = require('mongodb');
-const { authenticate } = require('./middleware/authenticate');
+const { authenticate,authenticateAdmin } = require('./middleware/authenticate');
 const user_routes = require('./router/user_routes');
 const admin_routes = require('./router/admin_routes');
 const axios = require('axios');
@@ -46,11 +46,11 @@ app.get('/admin/:id', admin_routes.get_admin);
 //display all users
 app.get('/admin', admin_routes.display_admins);
 // displays all necesary fields for user's profile
-app.get('/admin/profile', authenticate, admin_routes.admin_profile);
+app.get('/admin/profile', authenticateAdmin, admin_routes.admin_profile);
 // update user's profile 
-app.put('/admin/update-profile/', authenticate, admin_routes.update_admin);
+app.put('/admin/update-profile/', authenticateAdmin, admin_routes.update_admin);
 
-app.delete('/admin/logout', authenticate, admin_routes.log_out);
+app.delete('/admin/logout', authenticateAdmin, admin_routes.log_out);
 
 
 
