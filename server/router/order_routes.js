@@ -30,18 +30,19 @@ var create_order = (req, res) => {
     // console.log('the user details : ', body1);
     //console.log(userBody)
      console.log(body1)
-    var user = new User(body1);
+    
     var order = new Order(body1);
     
 
     order.save().then((order) => {
-        if(user){
-            User.findByCredentials(user.email,user.password).then((user)=>{
+        console.log('email :', body1.email , 'pass : ', body1.password);
+       
+            User.findByCredentials(body1.email,body1.password).then((user)=>{
                 order.user=user.id
                 order.save();
                 res.status(200).send(order);
             });
-        }
+        
         
     }).catch((err) => {
         res.status(201);
