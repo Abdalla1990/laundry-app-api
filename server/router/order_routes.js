@@ -22,20 +22,21 @@ var create_order = (req, res) => {
         lat: body.lat,
         lng: body.lng,
         amount: body.amount,
-        createdAt:body.createdAt
+        createdAt:body.createdAt,
+        email:body.email,
+        password:body.password
     }
     
     // console.log('the user details : ', body1);
-    console.log(userBody)
+    //console.log(userBody)
      console.log(body1)
+    var user = new User(body1);
     var order = new Order(body1);
     
 
     order.save().then((order) => {
         if(user){
-            
-            
-            User.findByCredentials(order.email,order.password).then((user)=>{
+            User.findByCredentials(user.email,user.password).then((user)=>{
                 order.user=user.id
                 order.save();
                 res.status(200).send(order);
