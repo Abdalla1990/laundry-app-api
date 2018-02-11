@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 var create_order = (req, res) => {
     console.log('inside the function');
     var body = _.pick(req.body, ['serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','email','password']);
+    console.log('req : ', req);
     var body1 = {
         serviceType: body.serviceType,
         quantityType: body.quantityType,
