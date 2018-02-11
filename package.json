@@ -24,6 +24,7 @@
         "axios": "^0.16.2",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.18.2",
+        "circular-json": "^0.5.1",
         "express": "^4.16.2",
         "google-elevation-api": "^1.0.0",
         "googlemapsutil": "^0.1.7",

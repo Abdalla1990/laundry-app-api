@@ -8,6 +8,7 @@ const { ObjectID } = require('mongodb');
 const { authenticate,authenticateAdmin } = require('./middleware/authenticate');
 const user_routes = require('./router/user_routes');
 const admin_routes = require('./router/admin_routes');
+const order_routes = require('./router/order_routes');
 const axios = require('axios');
 
 const port = process.env.PORT || 3000;
@@ -55,8 +56,8 @@ app.delete('/admin/logout', authenticateAdmin, admin_routes.log_out);
 
 
 
-//=============== Trails routes =======================
-
+//=============== Order routes =======================
+app.post('/orders/create-order', order_routes.create_order);
 
 app.listen(port, () => {
     console.log(`started up at port :${port}`)

@@ -3,6 +3,7 @@ const validator = require('validator');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
+const CircularJSON = require('circular-json');
 var UserSchema = new mongoose.Schema({
     //var User = mongoose.model('User', {
 
@@ -128,8 +129,10 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.statics.findByCredentials = function(email, password) {
     var user = this;
+    
     return user.findOne({ email }).then((user) => {
         if (!user) {
+            console.log('user ########################',email,password);
             return Promise.reject('user is not available!');
         } else {
             return new Promise((resolve, reject) => {
