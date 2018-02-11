@@ -27,7 +27,7 @@ var create_order = (req, res) => {
     var userBody = _.pick(req.body,['email','password']);
     // console.log('the user details : ', body1);
     // console.log(body)
-    // console.log(body1)
+     console.log(body1)
     var order = new Order(body1);
     var user = new User(userBody);
 
