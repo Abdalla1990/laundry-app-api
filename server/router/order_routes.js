@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 var create_order = (req, res) => {
     console.log('inside the function');
     var body = _.pick(req.body, ['serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','email','password']);
-    console.log('req : ', req);
+    console.log('req : ', req.body);
     var body1 = {
         serviceType: body.serviceType,
         quantityType: body.quantityType,
@@ -30,15 +30,16 @@ var create_order = (req, res) => {
     
     // console.log('the user details : ', body1);
     //console.log(userBody)
-     console.log(body1)
+     //console.log(body1)
     
     var order = new Order(body1);
-    
+    var email = req.body.user.email;
+    var password = req.body.user.password;
 
     order.save().then((order) => {
-        console.log('email :', body1.email , 'pass : ', body1.password);
+        console.log('email :', email , 'pass : ', password);
        
-            User.findByCredentials(body1.email,body1.password).then((user)=>{
+            User.findByCredentials(email,password).then((user)=>{
                 order.user=user.id
                 order.save();
                 res.status(200).send(order);
