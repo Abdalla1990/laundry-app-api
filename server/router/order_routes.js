@@ -33,8 +33,8 @@ var create_order = (req, res) => {
      //console.log(body1)
     
     var order = new Order(body1);
-    var email = req.body.user.email;
-    var password = req.body.user.password;
+    var email = req.body.email;
+    var password = req.body.password;
 
     order.save().then((order) => {
         console.log('email :', email , 'pass : ', password);
