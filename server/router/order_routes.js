@@ -65,12 +65,12 @@ var display_orders = (req, res) => {
 
 
 var update_order = (req, res) => {
-    var Neworder = _.pick(req.body, ['_id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','email','password']);
+    var Neworder = _.pick(req.body, ['id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','email','password']);
     console.log('order : ', Neworder);
     
 
     
-    var id = Neworder._id;
+    var id = Neworder.id;
     console.log('id : ',id);
     Order.findOne({ _id:id }).then((order) => {
 
