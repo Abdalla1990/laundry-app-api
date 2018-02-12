@@ -58,6 +58,7 @@ app.delete('/admin/logout', authenticateAdmin, admin_routes.log_out);
 
 //=============== Order routes =======================
 app.post('/orders/create-order', order_routes.create_order);
+app.post('/orders/update-order', order_routes.update_order);
 
 app.listen(port, () => {
     console.log(`started up at port :${port}`)

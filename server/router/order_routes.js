@@ -65,41 +65,28 @@ var display_orders = (req, res) => {
 
 
 var update_order = (req, res) => {
-    var body = _.pick(req.body, ['email', 'password', 'firstName', 'lastName', 'interestList', 'currentCause', 'address', 'city', 'country', 'province', 'age']);
-    var body1 = {
-        email: body.email,
-        password: body.password,
-        firstName: body.firstName,
-        lastName: body.lastName,
-        interestList: body.interestList,
-        currentCause: body.currentCause,
-        address: {
-            city: body.city,
-            country: body.country,
-            province: body.province,
-            address: body.address
-        },
-        age: body.age
-    }
+    var Neworder = _.pick(req.body, ['id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','email','password']);
+    console.log('order : ', Neworder);
+    
 
+    
+    var id = Neworder.id;
+    console.log('id : ',id);
+    Order.findOne({ _id:id }).then((order) => {
 
-    email = req.order.email;
-    Admin.findOne({ email }).then((order) => {
-        order.password = body1.password || order.password;
-        order.description = body1.description || order.description;
-        order.interestList = body1.interestList || order.interestList;
-        order.firstName = body1.firstName || order.firstName;
-        order.lastName = body1.lastName || order.lastName;
-        order.currentCause = body1.currentCause || order.currentCause;
-        order.address.city = body1.address.city || order.address.city;
-        order.address.country = body1.address.country || order.address.country;
-        order.address.province = body1.address.province || order.address.province;
-        order.address.address = body1.address.address || order.address.address;
-        order.age = body1.age || order.age;
-        return order;
-    }).then((order) => {
-        console.log('###############', order.email)
-        console.log('###############', order.address.address);
+       order.status = Neworder.status;
+       order.lat = Neworder.lat;
+       order.lng = Neworder.lng;
+       order.user = Neworder.user;
+       order.serviceType = Neworder.serviceType;
+       order.quantityType = Neworder.quantityType;
+       order.note = Neworder.note;
+       order.amount = Neworder.amount;
+       order.createdAt = Neworder.createdAt;
+       return order;
+    }) .then((order) => {
+        console.log('returned order : ',order);
+        
         order.save().then((orderchanges) => {
             res.status(200).send(orderchanges);
 
