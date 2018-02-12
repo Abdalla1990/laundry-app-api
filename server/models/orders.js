@@ -52,7 +52,7 @@ var OrderSchema = new mongoose.Schema({
 OrderSchema.methods.toJSON = function() {
     var order = this;
     var orderObject = order.toObject();
-    return _.pick(orderObject, ['serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','user','note']);
+    return _.pick(orderObject, ['_id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','user','note']);
 };
 
 
