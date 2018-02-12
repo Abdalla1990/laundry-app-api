@@ -72,26 +72,34 @@ var update_order = (req, res) => {
     
     var id = Neworder.id;
     console.log('id : ',id);
-    Order.findOne({ _id:id }).then((order) => {
+    User.findByCredentials(Neworder.email,Neworder.password).then((user)=>{
+        var userId = user.id;
+    console.log('user found : ', user);
+        Order.findOne({ _id:id }).then((order) => {
 
-       order.status = Neworder.status;
-       order.lat = Neworder.lat;
-       order.lng = Neworder.lng;
-       order.user = Neworder.user;
-       order.serviceType = Neworder.serviceType;
-       order.quantityType = Neworder.quantityType;
-       order.note = Neworder.note;
-       order.amount = Neworder.amount;
-       order.createdAt = Neworder.createdAt;
-       return order;
-    }) .then((order) => {
-        console.log('returned order : ',order);
-        
-        order.save().then((orderchanges) => {
-            res.status(200).send(orderchanges);
-
-        }).catch((err) => { res.status(400).send(err) });
-    });
+            order.status = Neworder.status;
+            order.lat = Neworder.lat;
+            order.lng = Neworder.lng;
+            order.user = Neworder.user;
+            order.serviceType = Neworder.serviceType;
+            order.quantityType = Neworder.quantityType;
+            order.note = Neworder.note;
+            order.amount = Neworder.amount;
+            order.createdAt = Neworder.createdAt;
+            order.user = userId;
+            return order;
+         }) .then((order) => {
+             console.log('returned order : ',order);
+             
+             order.save().then((orderchanges) => {
+                 res.status(200).send(orderchanges);
+     
+             }).catch((err) => { res.status(400).send(err) });
+         });
+    }).catch((err)=>{
+        res.status(201).send(err);
+    })
+    
 
 
 }
