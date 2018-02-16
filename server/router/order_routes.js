@@ -63,14 +63,14 @@ var display_orders = (req, res) => {
 
 
 var update_order = (req, res) => {
-    var Neworder = _.pick(req.body, ['id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','email','password']);
+    var Neworder = _.pick(req.body, ['id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','auth']);
     console.log('order : ', Neworder);
     
 
     
     var id = Neworder.id;
     console.log('id : ',id);
-    User.findByCredentials(Neworder.email,Neworder.password).then((user)=>{
+    User.findByToken(Neworder.auth).then((user)=>{
         var userId = user.id;
     console.log('user found : ', user);
         Order.findOne({ _id:id }).then((order) => {
