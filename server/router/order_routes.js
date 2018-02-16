@@ -35,7 +35,7 @@ var create_order = (req, res) => {
     
 
     order.save().then((order) => {
-        console.log('email :', email , 'pass : ', password);
+        
             let auth = order.auth;
             User.findByToken(auth).then((user)=>{
                 order.user=user.id
