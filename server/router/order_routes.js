@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 var create_order = (req, res) => {
     console.log('inside the function');
-    var body = _.pick(req.body, ['serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','email','password']);
+    var body = _.pick(req.body, ['serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','auth']);
     console.log('req : ', req.body);
     var body1 = {
         serviceType: body.serviceType,
@@ -24,22 +24,18 @@ var create_order = (req, res) => {
         lng: body.lng,
         amount: body.amount,
         createdAt:body.createdAt,
-        email:body.email,
-        password:body.password
+        auth : body.auth
     }
     
-    // console.log('the user details : ', body1);
-    //console.log(userBody)
-     //console.log(body1)
     
     var order = new Order(body1);
-    var email = req.body.email;
-    var password = req.body.password;
-
+   
+    var auth = req.body.auth;
     order.save().then((order) => {
-        console.log('email :', email , 'pass : ', password);
        
-            User.findByCredentials(email,password).then((user)=>{
+       
+            User.findByToken(auth).then((user)=>{
+                console.log('i found the user : ', user );
                 order.user=user.id
                 order.save();
                 res.status(200).send(order);
@@ -65,18 +61,18 @@ var display_orders = (req, res) => {
 
 
 var update_order = (req, res) => {
-    var Neworder = _.pick(req.body, ['id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','email','password']);
-    console.log('order : ', Neworder);
+    var Neworder = _.pick(req.body, ['id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','auth']);
+   // console.log('order : ', Neworder);
     
 
     
     var id = Neworder.id;
     console.log('id : ',id);
-    User.findByCredentials(Neworder.email,Neworder.password).then((user)=>{
+    User.findByToken(Neworder.auth).then((user)=>{
         var userId = user.id;
     console.log('user found : ', user);
         Order.findOne({ _id:id }).then((order) => {
-
+    console.log('order found : ', order )
             order.status = Neworder.status;
             order.lat = Neworder.lat;
             order.lng = Neworder.lng;
