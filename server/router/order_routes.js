@@ -68,6 +68,7 @@ var update_order = (req, res) => {
     
     var id = Neworder.id;
     console.log('id : ',id);
+    console.log('auth : ', Neworder.auth);
     User.findByToken(Neworder.auth).then((user)=>{
         var userId = user.id;
     console.log('user found : ', user);
