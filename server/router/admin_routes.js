@@ -119,13 +119,13 @@ var get_admin = (req, res) => {
 
 var log_in = (req, res) => {
     console.log('inside the function');
-    var body = _.pick(req.body, ['email', 'password']);
-    console.log(req.body.email);
-    console.log(req.body.password);
+    var credentials = _.pick(req.body, ['email', 'password']);
+    console.log(credentials.email);
+    console.log(credentials.password); 
 
 
 
-    Admin.findByCredentials(body.email, body.password).then((Admin) => {
+    Admin.findByCredentials(credentials.email, credentials.password).then((Admin) => {
 
         return Admin.generateAuthToken().then((token) => {
             res.header('auth', token).send(Admin);
