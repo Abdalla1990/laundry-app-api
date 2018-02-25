@@ -53,6 +53,7 @@ app.put('/admin/update-profile/', authenticateAdmin, admin_routes.update_admin);
 
 app.delete('/admin/logout', authenticateAdmin, admin_routes.log_out);
 
+app.delete('/admin/delete/:email' , admin_routes.deleteAdmin);
 
 
 

@@ -92,6 +92,13 @@ AdminSchema.methods.removeToken = function(token) {
     });
 };
 
+AdminSchema.statics.removeAdmin = function(email) {
+    var user = this;
+    return user.remove({
+        email :email
+    });
+};
+
 
 AdminSchema.statics.findByToken = function(token) {
     var User = this;

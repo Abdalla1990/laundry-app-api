@@ -154,6 +154,17 @@ var log_out = (req, res) => {
 
 }
 
+var deleteAdmin = (req, res) => {
+    var email = req.params.email;
+    Admin.removeAdmin(email).then(() => {
+        res.status(200).send('user has been deleted');
+    }).catch((err) => {
+        res.status(400).send(' user not found or something went wrong');
+    });
+
+
+}
+
 
 module.exports = {
     create_admin,
@@ -163,4 +174,5 @@ module.exports = {
     log_in,
     log_out,
     admin_profile,
+    deleteAdmin
 }
