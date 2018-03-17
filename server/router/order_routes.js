@@ -52,7 +52,7 @@ var create_order = (req, res) => {
 
 var display_orders = (req, res) => {
 
-    order.find().then((Ulist) => {
+    Order.find().then((Ulist) => {
         res.send(Ulist);
     }).catch((e) => {
         res.send(e);
