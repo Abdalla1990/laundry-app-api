@@ -91,7 +91,7 @@ var update_order = (req, res) => {
              order.save().then((orderchanges) => {
                  res.status(200).send(orderchanges);
      
-             }).catch((err) => { res.status(400).send(err) });
+             }).catch((err) => { console.log(err);res.status(400).send(err) });
          });
     }).catch((err)=>{
         res.status(201).send(err);
