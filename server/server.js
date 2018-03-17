@@ -12,7 +12,7 @@ const order_routes = require('./router/order_routes');
 const axios = require('axios');
 
 const port = process.env.PORT || 3000;
-
+app.use(cors());
 app.use(bodyParser.json());
 
 
