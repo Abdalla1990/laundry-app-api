@@ -15,14 +15,7 @@ const port = process.env.PORT || 3000;
 
 
 app.use(bodyParser.json());
-// app.use(cors());
-app.use((req, res, next) =>{
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers", "auth ,Origin, X-Requested-With, Content-Type, Accept");
-    
-    
-    return next();
-  });
+app.use(cors());
 
 // ========== User Routes =================
 
