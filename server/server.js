@@ -13,9 +13,9 @@ const axios = require('axios');
 var cors = require('cors');
 const port = process.env.PORT || 3000;
 
-
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
+
 
 // ========== User Routes =================
 

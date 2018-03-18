@@ -130,6 +130,8 @@ var log_in = (req, res) => {
         return User.generateAuthToken().then((token) => {
             console.log('auth : ', token)
             res.setHeader('auth', token).send(User);
+        }).catch((err)=>{
+            console.log('error : ', error);
         });
 
 
