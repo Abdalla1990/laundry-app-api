@@ -130,11 +130,9 @@ var log_in = (req, res) => {
        
         return User.generateAuthToken().then((token) => {
             console.log('auth : ', token)
-            let user = {
-                auth:token,
-                user:User
-            }
-            res.send(user);
+           
+            res.writeHead(200, {'auth': token});
+            res.send(User);
         });
 
 
