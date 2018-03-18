@@ -10,10 +10,9 @@ const user_routes = require('./router/user_routes');
 const admin_routes = require('./router/admin_routes');
 const order_routes = require('./router/order_routes');
 const axios = require('axios');
-var cors = require('cors');
 
 const port = process.env.PORT || 3000;
-app.use(cors());
+
 app.use(bodyParser.json());
 
 
@@ -61,7 +60,7 @@ app.delete('/admin/delete/:email' , admin_routes.deleteAdmin);
 //=============== Order routes =======================
 app.post('/orders/create-order', order_routes.create_order);
 app.post('/orders/update-order', order_routes.update_order);
-app.get('/orders/get-orders',order_routes.display_orders);
+app.get('/orders/get-orders',order_routes.display_orders)
 app.listen(port, () => {
     console.log(`started up at port :${port}`)
 });
