@@ -10,11 +10,18 @@ const user_routes = require('./router/user_routes');
 const admin_routes = require('./router/admin_routes');
 const order_routes = require('./router/order_routes');
 const axios = require('axios');
-
+var cors = require('cors');
 const port = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
 
+app.use(bodyParser.json());
+app.use(cors({
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'origin': '*',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false
+  }));
 
 // ========== User Routes =================
 
