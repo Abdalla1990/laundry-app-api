@@ -128,6 +128,7 @@ var log_in = (req, res) => {
     User.findByCredentials(body.email, body.password).then((User) => {
 
         return User.generateAuthToken().then((token) => {
+            console.log('auth : ', token);
             res.header('auth', token).send(User);
         });
 
