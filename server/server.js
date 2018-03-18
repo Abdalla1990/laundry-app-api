@@ -16,7 +16,7 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors({
-    'allowedHeaders': ['auth', 'Content-Type'],
+    'allowedHeaders': ['*'],
     'exposedHeaders': ['*'],
     'origin': '*',
     'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
