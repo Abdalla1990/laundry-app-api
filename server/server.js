@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 // app.use(cors());
 app.use((req, res, next) =>{
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("content-type", "*");
-    res.setHeader("auth", "*");
+    // res.setHeader("content-type", "*");
+    
     return next();
   });
 
