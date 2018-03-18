@@ -14,7 +14,8 @@ var cors = require('cors');
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-    headers:"['Accept', 'Authorization', 'Content-Type', 'auth'"
+    additionalHeaders:"['Accept', 'Authorization', 'Content-Type', 'auth']",
+    additionalExposedHeaders: "['auth']"
 }));
 app.use(bodyParser.json());
 
