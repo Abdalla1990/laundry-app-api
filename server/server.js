@@ -21,12 +21,12 @@ var corsOptions = {
   enablePreflight: true
 };
 app.use(bodyParser.json());
-
+app.use(cors(corsOptions));
 
 // ========== User Routes =================
 
 
-app.post('/users/login',cors(corsOptions), user_routes.log_in);
+app.post('/users/login', user_routes.log_in);
 app.post('/users/create-user', user_routes.create_user);
 // get the user's info , for admin purposes 
 app.get('/users/:id', user_routes.get_user);
