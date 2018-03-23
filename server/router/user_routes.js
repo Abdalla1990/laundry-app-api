@@ -130,7 +130,7 @@ var log_in = (req, res) => {
        
         return User.generateAuthToken().then((token) => {
             console.log('x-auth : ', token)
-            res.setHeader('x-auth', token).send(User);
+            res.set('x-auth', token).send(User);
             
         });
 
