@@ -129,8 +129,8 @@ var log_in = (req, res) => {
 
        
         return User.generateAuthToken().then((token) => {
-            console.log('Auth : ', token)
-            res.header('Auth', token).send(User);
+            console.log('x-Auth : ', token)
+            res.header('x-Auth', token).send(User);
             
         });
 
