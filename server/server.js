@@ -13,15 +13,11 @@ const axios = require('axios');
 var cors = require('cors');
 const port = process.env.PORT || 3000;
 
-// var corsOptions = {
-//   origin: true,
-//   methods: ['POST'],
-//   credentials: true,
-//   maxAge: 3600,
-//   enablePreflight: true
-// };
+var corsOptions = {
+  origin: true
+};
 app.use(bodyParser.json());
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // ========== User Routes =================
 
