@@ -54,7 +54,7 @@ var display_orders = (req, res) => {
 
     Order.find().then((Ulist) => {
         console.log('Ulist',Ulist);
-        res.send(Ulist);
+        res.status(200).send(Ulist);
     }).catch((e) => {
         console.log('Ulist',e);
         res.send(e);
