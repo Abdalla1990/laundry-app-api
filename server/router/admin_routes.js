@@ -37,8 +37,11 @@ var create_admin = (req, res) => {
         return admin.generateAuthToken();
 
     }).then((token) => {
-        admin.auth=token;
-        res.status(200).send(admin);
+        NewUser = {
+            user : admin , 
+            auth : token
+        }
+        res.send(NewUser);
     }).catch((err) => {
         res.status(201);
         res.send(err.message);
@@ -129,8 +132,11 @@ var log_in = (req, res) => {
     Admin.findByCredentials(credentials.email, credentials.password).then((Admin) => {
 
         return Admin.generateAuthToken().then((token) => {
-            Admin.auth=token;
-            res.status(200).send(Admin);
+            NewUser = {
+                user : Admin , 
+                auth : token
+            }
+            res.send(NewUser);
         });
 
 

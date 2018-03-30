@@ -37,8 +37,11 @@ var create_user = (req, res) => {
         return user.generateAuthToken();
 
     }).then((token) => {
-        user.auth = token ; 
-        res.send(user);
+        NewUser = {
+            user : user , 
+            auth : token
+        }
+        res.send(NewUser);
     }).catch((err) => {
         res.status(201);
         res.send(err.message);
@@ -130,8 +133,13 @@ var log_in = (req, res) => {
 
        
         return User.generateAuthToken().then((token) => {
-            User.auth = token ;
-            res.status(200).send(User);
+            
+            console.log('auth : ', User)
+            NewUser = {
+                user : User , 
+                auth : token
+            }
+            res.send(NewUser);
             
         }).catch((err)=>{res.status(400).send(err)});
 

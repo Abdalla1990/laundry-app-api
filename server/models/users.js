@@ -31,7 +31,7 @@ var UserSchema = new mongoose.Schema({
         minlength: 6
     },role:{
         type:String,
-        required:true,
+        required:false,
         minlength: 3
     },
     firstName: {
