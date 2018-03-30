@@ -133,7 +133,7 @@ var log_in = (req, res) => {
             User.auth = token ;
             res.status(200).send(User);
             
-        });
+        }).catch((err)=>{res.status(400).send(err)});
 
 
     }).catch((err) => {
