@@ -37,7 +37,8 @@ var create_user = (req, res) => {
         return user.generateAuthToken();
 
     }).then((token) => {
-        res.header('x-auth', token).send(user);
+        user.auth = token ; 
+        res.send(user);
     }).catch((err) => {
         res.status(201);
         res.send(err.message);
@@ -129,8 +130,8 @@ var log_in = (req, res) => {
 
        
         return User.generateAuthToken().then((token) => {
-            console.log('x-auth : ', token)
-            res.set('x-auth', token).send(User);
+            User.auth = token ;
+            res.status(200).send(User);
             
         });
 
