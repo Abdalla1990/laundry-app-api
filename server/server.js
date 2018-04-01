@@ -31,7 +31,7 @@ app.get('/users',user_routes.display_users);
 // displays all necesary fields for user's profile
 app.get('/user/profile', authenticate, user_routes.user_profile);
 // update user's profile 
-app.put('/users/update-profile/', authenticate, user_routes.update_user);
+app.put('/users/update-profile', authenticate, user_routes.update_user);
 
 app.delete('/users/logout', authenticate, user_routes.log_out);
 
