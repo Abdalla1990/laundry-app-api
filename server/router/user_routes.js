@@ -62,46 +62,28 @@ var display_users = (req, res) => {
 
 
 var update_user = (req, res) => {
-    var body = _.pick(req.body, ['email', 'password', 'firstName', 'lastName', 'interestList', 'currentCause', 'address', 'city', 'country', 'province', 'age']);
+    var body = _.pick(req.body, ['email', 'password', 'firstName', 'lastName']);
     var body1 = {
         email: body.email,
         password: body.password,
         firstName: body.firstName,
-        lastName: body.lastName,
-        interestList: body.interestList,
-        currentCause: body.currentCause,
-        address: {
-            city: body.city,
-            country: body.country,
-            province: body.province,
-            address: body.address
-        },
-        age: body.age
+        lastName: body.lastName
     }
 
 
     email = req.user.email;
     User.findOne({ email }).then((user) => {
         user.password = body1.password || user.password;
-        user.description = body1.description || user.description;
-        user.interestList = body1.interestList || user.interestList;
         user.firstName = body1.firstName || user.firstName;
         user.lastName = body1.lastName || user.lastName;
-        user.currentCause = body1.currentCause || user.currentCause;
-        user.address.city = body1.address.city || user.address.city;
-        user.address.country = body1.address.country || user.address.country;
-        user.address.province = body1.address.province || user.address.province;
-        user.address.address = body1.address.address || user.address.address;
-        user.age = body1.age || user.age;
         return user;
     }).then((user) => {
         console.log('###############', user.email)
         console.log('###############', user.address.address);
         user.save().then((userchanges) => {
             res.status(200).send(userchanges);
-
         }).catch((err) => { res.status(400).send(err) });
-    });
+    }).catch((err) => { res.status(400).send(err) });
 
 
 }
