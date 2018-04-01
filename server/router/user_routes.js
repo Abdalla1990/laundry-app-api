@@ -62,7 +62,8 @@ var display_users = (req, res) => {
 
 
 var update_user = (req, res) => {
-    var body = _.pick(req.body, ['email', 'password', 'firstName', 'lastName']);
+    console.log('req', req);
+    var body = _.pick(req.body, ['email']);
     var body1 = {
         email: body.email,
         password: body.password,
@@ -71,7 +72,7 @@ var update_user = (req, res) => {
     }
 
 
-    email = req.user.email;
+    email = req.body.email;
     User.findOne({ email }).then((user) => {
         user.email= body1.email
         user.password = body1.password || user.password;
@@ -79,8 +80,7 @@ var update_user = (req, res) => {
         user.lastName = body1.lastName || user.lastName;
         return user;
     }).then((user) => {
-        console.log('###############', user.email)
-        console.log('###############', user.address.address);
+        console.log('###############', user)
         user.save().then((userchanges) => {
             res.status(200).send(userchanges);
         }).catch((err) => { res.status(400).send(err) });
