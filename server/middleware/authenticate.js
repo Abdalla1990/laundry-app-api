@@ -20,7 +20,7 @@ var authenticateAdmin = (req, res, next) => {
     var token = req.header('x-auth');
     Admin.findByToken(token).then((admin) => {
         if (!admin) {
-            return Promise.reject();
+            return Promise.reject('no admin');
         }
         req.admin = admin;
 
@@ -28,6 +28,7 @@ var authenticateAdmin = (req, res, next) => {
 
         next();
     }).catch((err) => {
+        console.log('error : ', err);
         res.status(401).send();
     });
 }

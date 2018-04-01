@@ -27,7 +27,7 @@ app.post('/users/create-user', user_routes.create_user);
 // get the user's info , for admin purposes 
 app.get('/users/:id', user_routes.get_user);
 //display all users
-app.get('/users', user_routes.display_users);
+app.get('/users',authenticateAdmin,user_routes.display_users);
 // displays all necesary fields for user's profile
 app.get('/user/profile', authenticate, user_routes.user_profile);
 // update user's profile 

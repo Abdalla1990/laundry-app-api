@@ -101,14 +101,17 @@ AdminSchema.statics.removeAdmin = function(email) {
 
 
 AdminSchema.statics.findByToken = function(token) {
-    var User = this;
+    var admin = this;
     var decoded;
+    
     try {
+        console.log('token : ', token);
         decoded = jwt.verify(token, 'secret');
+        console.log('decoded : ', decoded);
     } catch (e) {
         return Promise.reject('invalid token sent ');
     }
-    return User.findOne({
+    return admin.findOne({
         '_id': decoded._id,
         'tokens.token': token,
         'tokens.access': 'auth'
