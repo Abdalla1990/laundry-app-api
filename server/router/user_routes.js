@@ -69,7 +69,7 @@ var update_user = (req, res) => {
 
     email = req.body.email;
     User.findOne({ email }).then((user) => {
-        user.email= body1.email || user.email
+        user.email= body.email || user.email
         user.password = body.password || user.password;
         user.firstName = body.firstName || user.firstName;
         user.lastName = body.lastName || user.lastName;
