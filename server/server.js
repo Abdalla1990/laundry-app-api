@@ -33,12 +33,10 @@ app.get('/user/profile', authenticate, user_routes.user_profile);
 // update user's profile 
 app.post('/users/update-profile', user_routes.update_user);
 
+app.delete('/users/remove-user', authenticateAdmin,user_routes.remove_user);
+
 app.delete('/users/logout', authenticate, user_routes.log_out);
-
 //private
-app.post('/users-points-trail-trip', user_routes.users_points_trails_trips);
-
-app.post('/newTrip', authenticate, user_routes.newTrip);
 
 // ========== Admin Routes =================
 

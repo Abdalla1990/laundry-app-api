@@ -84,6 +84,18 @@ var update_user = (req, res) => {
 
 }
 
+
+
+var remove_user = (req,res)=>{
+    console.log('req', req.body);
+    
+    User.findOneAndRemove({_id: req.body._id}).then((deleted)=>{
+        console.log('delete : ', deleted);
+        res.status(200).send(deleted);
+    }).catch((err)=>{
+        res.status(404).send(err);
+    })
+}
 var get_user = (req, res) => {
 
 
@@ -248,6 +260,5 @@ module.exports = {
     log_in,
     log_out,
     user_profile,
-    users_points_trails_trips,
-    newTrip
+    remove_user
 }
