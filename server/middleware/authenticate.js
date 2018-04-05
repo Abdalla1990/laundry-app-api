@@ -17,6 +17,7 @@ var authenticate = (req, res, next) => {
     });
 }
 var authenticateAdmin = (req, res, next) => {
+    console.log('req , ',req)
     var token = req.header('x-auth');
     Admin.findByToken(token).then((admin) => {
         if (!admin) {
