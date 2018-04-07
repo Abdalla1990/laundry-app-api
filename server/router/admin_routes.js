@@ -23,7 +23,7 @@ var create_admin = (req, res) => {
         password1: body.password1,
         firstName: body.firstName,
         lastName: body.lastName,
-        role : body.role
+        role : 'admin'
     }
     console.log('the admin details : ', body1);
     console.log(body)
