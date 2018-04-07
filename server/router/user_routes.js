@@ -87,7 +87,7 @@ var update_user = (req, res) => {
 
 
 var remove_user = (req,res)=>{
-    console.log('req', req.body);
+    console.log('req in user routes after auth ', req);
     
     User.findOneAndRemove({_id: req.body._id}).then((deleted)=>{
         console.log('delete : ', deleted);
