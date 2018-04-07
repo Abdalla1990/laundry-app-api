@@ -6,7 +6,7 @@ var app = express();
 var _ = require('lodash');
 const { ObjectID } = require('mongodb');
 const { authenticate } = require('../middleware/authenticate');
-
+const {defaultPassword} = require('../db/settings')
 const axios = require('axios');
 const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
@@ -28,6 +28,9 @@ var create_admin = (req, res) => {
     console.log('the admin details : ', body1);
     console.log(body)
     console.log(body1)
+    if(body1.password === undefined){
+        body1.password = defaultPassword
+    }
     var admin = new Admin(body1);
 
 
