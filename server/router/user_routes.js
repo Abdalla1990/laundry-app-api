@@ -63,7 +63,7 @@ var display_users = (req, res) => {
 
 var update_user = (req, res) => {
     console.log('req', req);
-    var body = _.pick(req.body, ['email', 'password', 'firstName', 'lastName']);
+    var body = _.pick(req.body, ['email', 'password', 'firstName', 'lastName','role']);
     
 
 
@@ -73,6 +73,7 @@ var update_user = (req, res) => {
         user.password = body.password || user.password;
         user.firstName = body.firstName || user.firstName;
         user.lastName = body.lastName || user.lastName;
+        user.role = body.role || user.role
         return user;
     }).then((user) => {
         console.log('###############', user)
