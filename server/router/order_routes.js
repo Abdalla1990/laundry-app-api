@@ -52,13 +52,41 @@ var create_order = (req, res) => {
 
 var display_orders = (req, res) => {
 
-    Order.find().then((Ulist) => {
-        console.log('Ulist',Ulist);
-        res.status(200).send(Ulist);
+
+    Order.find().then((orders) => {
+        
+       let completeOrders = [];
+        orders.map((order,index)=>{
+            let copiedOrder = order; 
+            if(order.user !== undefined){
+                let _id = order.user
+                User.find().then((user)=>{
+                    // console.log('user ' , user);
+                    user[0].tokens=[];
+                    user[0].password ="";
+                    copiedOrder.user = user[0];
+                    // console.log('copied : ', copiedOrder);
+                })
+            }
+            
+        })
+            
+        
+
+        
+        setTimeout(()=>{
+            
+            res.status(200).send(orders);
+        
+        },1000)
+        
+        
+       
+        
     }).catch((e) => {
         console.log('Ulist',e);
         res.send(e);
-    });
+    })
 }
 
 

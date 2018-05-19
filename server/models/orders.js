@@ -3,6 +3,7 @@ const validator = require('validator');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
+
 var OrderSchema = new mongoose.Schema({
     
 
@@ -44,7 +45,7 @@ var OrderSchema = new mongoose.Schema({
     },
     user :{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'User',
     }
 });
 
@@ -75,6 +76,6 @@ OrderSchema.statics.findById = function(id) {
         }
     });
 };
-
-var Order = mongoose.model('Order', OrderSchema);
+var User = mongoose.model('User');
+var Order = mongoose.model('Order',OrderSchema);
 module.exports = { Order };

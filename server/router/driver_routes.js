@@ -155,100 +155,6 @@ var log_out = (req, res) => {
 }
 
 
-let users_points_trails_trips = (req, res) => {
-    var bodyUser = _.pick(req.body, ['email', 'password']);
-    var bodyTrail = _.pick(req.body, ['name', 'description']);
-    var bodyPoint = _.pick(req.body, ['thepoints']);
-    var bodyTrip = _.pick(req.body, ['timeStarted', 'timeEnded']);
-    var user = new User(bodyUser);
-    var trail = new Trails(bodyTrail);
-    var point = new Points(bodyPoint);
-    var trip = new Trips(bodyTrip);
-    user.email = bodyUser.email;
-    user.password = bodyUser.password;
-    trail.name = bodyTrail.name;
-    trail.description = bodyTrail.description;
-    point.trail = trail;
-    user.trail = trail;
-
-    point.user = user;
-
-    trip.trail = trail;
-    trip.user = user;
-    trip.time.timeStarted = bodyTrip.timeStarted;
-    trip.time.timeEnded = bodyTrip.timeEnded;
-    trip.time.timeSpent = bodyTrip.timeEnded - bodyTrip.timeStarted;
-    point.earnedPoints = trip.time.timeSpent * 10;
-    trip.pointsEarned = point.earnedPoints;
-    point.trip = trip
-
-
-
-
-
-    let data = [];
-
-    //if (user && trail && point & trip) {
-
-
-    trail.save().then(() => {
-            data[0] = trail;
-            console.log('inside trail');
-        }).then(() => {
-
-            point.save().catch((err) => { console.log(err) });
-            console.log('inside point');
-            data[1] = point;
-        }).then(() => {
-            user.save().catch((err) => { console.log(err) });
-            console.log('inside user');
-            var token = user.generateAuthToken();
-            res.header('x-auth', token);
-            data[2] = user;
-        }).then(() => {
-
-            trip.save().catch((err) => { console.log(err) });
-            console.log('inside trip');
-            data[3] = trip;
-            console.log('success!');
-            res.status(200).send(data);
-
-        }).catch((err) => {
-            console.log('something went wrong , ', err)
-        })
-        //}
-
-};
-
-let newTrip = (req, res) => {
-    var bodyTrail = _.pick(req.body, ['trailId']);
-    var bodyTrip = _.pick(req.body, ['timeStarted', 'timeEnded']);
-    var bodyUser = req.user;
-
-    let trip = new Trips(bodyTrip);
-    Trails.findOne({ _id: bodyTrail.trailId }).then((trail) => {
-        trip.trail = trail;
-        trip.time.timeStarted = bodyTrip.timeStarted;
-        trip.time.timeEnded = bodyTrip.timeEnded;
-        trip.user = bodyUser;
-        trip.save().then((data) => {
-            let userId = data.user._id
-            User.findOne({ _id: userId }).then((user) => {
-                user.trips.push(data._id);
-                return user
-            }).then((user) => {
-                user.save();
-            }).then(() => {
-                console.log(data)
-                res.status(200).send(data);
-            })
-
-        }).catch((err) => {
-            res.status(400).send(err)
-        })
-        User.findOne()
-    });
-};
 
 module.exports = {
     create_user,
@@ -257,7 +163,5 @@ module.exports = {
     get_user,
     log_in,
     log_out,
-    user_profile,
-    users_points_trails_trips,
-    newTrip
+    user_profile
 }
