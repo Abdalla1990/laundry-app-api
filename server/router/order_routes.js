@@ -52,11 +52,11 @@ var create_order = (req, res) => {
 
 var display_orders = (req, res) => {
 
-    Order.find().then((Ulist) => {
-        console.log('Ulist',Ulist);
-        res.status(200).send(Ulist);
+    Order.find().populate('user').then((orders) => {
+        console.log('orders',orders);
+        res.status(200).send(orders);
     }).catch((e) => {
-        console.log('Ulist',e);
+        console.log('error',e);
         res.send(e);
     });
 }
