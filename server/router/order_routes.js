@@ -64,12 +64,12 @@ var display_orders = (req, res) => {
 
 
 var update_order = (req, res) => {
-    var Neworder = _.pick(req.body, ['id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','auth']);
+    var Neworder = _.pick(req.body, ['_id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','auth']);
    // console.log('order : ', Neworder);
     
 
     
-    var id = Neworder.id;
+    var id = Neworder._id;
     console.log('id : ',id);
     console.log('auth : ', Neworder.auth);
     User.findByToken(Neworder.auth).then((user)=>{
