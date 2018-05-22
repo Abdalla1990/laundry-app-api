@@ -2,6 +2,7 @@ var { Mongoose } = require('../db/mongoose.js');
 const express = require('express');
 const { Order } = require('../models/orders');
 const { User } = require('../models/users');
+const {Admin} = require('../models/admin');
 var bodyParser = require('body-parser');
 var app = express();
 var _ = require('lodash');
@@ -64,7 +65,7 @@ var display_orders = (req, res) => {
 
 
 var update_order = (req, res) => {
-    var Neworder = _.pick(req.body, ['_id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','auth']);
+    var Neworder = _.pick(req.body, ['_id','serviceType','quantityType', 'lng', 'lat','status','createdAt','amount','note','status','auth','access']);
    // console.log('order : ', Neworder);
     
 
@@ -72,33 +73,63 @@ var update_order = (req, res) => {
     var id = Neworder._id;
     console.log('id : ',id);
     console.log('auth : ', Neworder.auth);
-    User.findByToken(Neworder.auth).then((user)=>{
-        var userId = user.id;
-    console.log('user found : ', user);
-        Order.findOne({ _id:id }).then((order) => {
-    console.log('order found : ', order )
-            order.status = Neworder.status;
-            order.lat = Neworder.lat;
-            order.lng = Neworder.lng;
-            order.user = Neworder.user;
-            order.serviceType = Neworder.serviceType;
-            order.quantityType = Neworder.quantityType;
-            order.note = Neworder.note;
-            order.amount = Neworder.amount;
-            order.createdAt = Neworder.createdAt;
-            order.user = userId;
-            return order;
-         }) .then((order) => {
-             console.log('returned order : ',order);
-             
-             order.save().then((orderchanges) => {
-                 res.status(200).send(orderchanges);
-     
-             }).catch((err) => { console.log(err);res.status(400).send(err) });
-         });
-    }).catch((err)=>{
-        res.status(201).send(err);
-    })
+    var access = Neworder.access;
+    if(access === 'admin'){
+        Admin.findByToken(Neworder.auth).then((admin)=>{
+            var userId = admin._id;
+        console.log('admin found : ', admin);
+            Order.findOne({ _id:id }).then((order) => {
+        console.log('order found : ', order )
+                order.status = Neworder.status;
+                order.lat = Neworder.lat;
+                order.lng = Neworder.lng;
+                order.serviceType = Neworder.serviceType;
+                order.quantityType = Neworder.quantityType;
+                order.note = Neworder.note;
+                order.amount = Neworder.amount;
+                order.createdAt = Neworder.createdAt;
+                return order;
+             }) .then((order) => {
+                 console.log('returned order : ',order);
+                 
+                 order.save().then((orderchanges) => {
+                     res.status(200).send(orderchanges);
+         
+                 }).catch((err) => { console.log(err);res.status(400).send(err) });
+             });
+        }).catch((err)=>{
+            res.status(201).send(err);
+        })
+    }else{
+        User.findByToken(Neworder.auth).then((user)=>{
+            var userId = user.id;
+        console.log('user found : ', user);
+            Order.findOne({ _id:id }).then((order) => {
+        console.log('order found : ', order )
+                order.status = Neworder.status;
+                order.lat = Neworder.lat;
+                order.lng = Neworder.lng;
+                order.user = Neworder.user;
+                order.serviceType = Neworder.serviceType;
+                order.quantityType = Neworder.quantityType;
+                order.note = Neworder.note;
+                order.amount = Neworder.amount;
+                order.createdAt = Neworder.createdAt;
+                order.user = userId;
+                return order;
+             }) .then((order) => {
+                 console.log('returned order : ',order);
+                 
+                 order.save().then((orderchanges) => {
+                     res.status(200).send(orderchanges);
+         
+                 }).catch((err) => { console.log(err);res.status(400).send(err) });
+             });
+        }).catch((err)=>{
+            res.status(201).send(err);
+        })
+    }
+    
     
 
 
