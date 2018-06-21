@@ -99,13 +99,14 @@ UserSchema.statics.findByToken = function(token) {
     var decoded;
     try {
         decoded = jwt.verify(token, 'secret');
+        // console.log('DECODED : ',decoded);
     } catch (e) {
         return Promise.reject('invalid token sent ');
     }
     return User.findOne({
         '_id': decoded._id,
         'tokens.token': token,
-        'tokens.access': 'auth'
+        'tokens.access': decoded.access
     });
 };
 

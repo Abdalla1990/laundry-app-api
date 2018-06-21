@@ -137,7 +137,6 @@ var update_order = (req, res) => {
 
 var get_order = (req, res) => {
 
-
     var id = req.params.id;
     if (!ObjectID.isValid(id)) {
         res.status(400).send('Id field is empty or Id is not correct');
@@ -150,11 +149,25 @@ var get_order = (req, res) => {
 
 }
 
-
+var remove_orders = (req,res)=>{
+    console.log('REMOVE ',req.body._id)
+    Order.findByIdAndRemove(req.body._id).then((err,data)=>{
+        if(data === undefined){
+            res.status(201).send({"error":"No Orders found"});
+            return;
+        }
+        console.log('IFOUND IT ', data,err);
+        res.status(200).send(data);
+    }).catch((err)=>{
+        console.log('error',err);
+    });
+   
+}
 
 module.exports = {
     create_order,
     display_orders,
     update_order,
-    get_order
+    get_order,
+    remove_orders
 }

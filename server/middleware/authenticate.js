@@ -3,8 +3,10 @@ var {Admin} = require('./../models/admin');
 
 var authenticate = (req, res, next) => {
     var token = req.header('x-auth');
+    // console.log('TOKEN : ', token)
     User.findByToken(token).then((user) => {
         if (!user) {
+            console.log('USER IS NOT FOUND')
             return Promise.reject();
         }
         req.user = user;
@@ -13,7 +15,7 @@ var authenticate = (req, res, next) => {
 
         next();
     }).catch((err) => {
-        res.status(401).send();
+        res.status(401).send({"ERROR":"UNAUTHORIZED ACCESS"});
     });
 }
 var authenticateAdmin = (req, res, next) => {
