@@ -152,7 +152,7 @@ var get_order = (req, res) => {
 var remove_orders = (req,res)=>{
     console.log('REMOVE ',req.body._id)
     Order.findByIdAndRemove(req.body._id).then((err,data)=>{
-        console.log('DATA IS : ',data);
+        console.log('DATA IS : ',data ,err);
         if(data === undefined){
             res.status(201).send({"error":"No Orders found"});
             return;
