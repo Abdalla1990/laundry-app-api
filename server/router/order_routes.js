@@ -98,7 +98,8 @@ var update_order = (req, res) => {
                  }).catch((err) => { console.log(err);res.status(400).send(err) });
              });
         }).catch((err)=>{
-            res.status(201).send(err);
+            var message = "UNAUTHORIZED ACCESS"
+            res.status(401).send(message);
         })
     }else{
         User.findByToken(Neworder.auth).then((user)=>{
@@ -126,7 +127,8 @@ var update_order = (req, res) => {
                  }).catch((err) => { console.log(err);res.status(400).send(err) });
              });
         }).catch((err)=>{
-            res.status(201).send(err);
+            var message = "UNAUTHORIZED ACCESS"
+            res.status(401).send(message);
         })
     }
     
