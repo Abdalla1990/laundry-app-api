@@ -61,7 +61,9 @@ var UserSchema = new mongoose.Schema({
 
 
 
-});
+},{
+    usePushEach: true
+  });
 
 
 UserSchema.methods.toJSON = function() {

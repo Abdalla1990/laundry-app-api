@@ -60,7 +60,9 @@ var AdminSchema = new mongoose.Schema({
 
 
 
-});
+},{
+    usePushEach: true
+  });
 
 
 AdminSchema.methods.toJSON = function() {

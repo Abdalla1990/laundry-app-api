@@ -47,7 +47,9 @@ var OrderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     }
-});
+},{
+    usePushEach: true
+  });
 
 
 OrderSchema.methods.toJSON = function() {
