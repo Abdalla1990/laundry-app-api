@@ -23,17 +23,17 @@
     "dependencies": {
         "axios": "^0.16.2",
         "bcryptjs": "^2.4.3",
-        "body-parser": "^1.18.2",
-        "circular-json": "^0.5.1",
+        "body-parser": "^1.18.3",
+        "circular-json": "^0.5.5",
         "cors": "^2.8.4",
-        "express": "^4.16.2",
+        "express": "^4.16.3",
         "google-elevation-api": "^1.0.0",
         "googlemapsutil": "^0.1.7",
-        "jsonwebtoken": "^8.1.0",
-        "lodash": "^4.17.4",
-        "mongodb": "^2.2.5",
-        "mongoose": "^4.10.8",
-        "nodemon": "^1.12.1",
-        "validator": "^5.6.0"
+        "jsonwebtoken": "^8.3.0",
+        "lodash": "^4.17.10",
+        "mongodb": "^2.2.36",
+        "mongoose": "^4.13.14",
+        "nodemon": "^1.18.3",
+        "validator": "^5.7.0"
     }
 }
