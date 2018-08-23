@@ -52,14 +52,19 @@ var create_order = (req, res) => {
 }
 
 var display_orders = (req, res) => {
-
-    Order.find().populate('user').then((orders) => {
-        console.log('orders',orders);
-        res.status(200).send(orders);
-    }).catch((e) => {
-        console.log('error',e);
-        res.send(e);
-    });
+    var userId = req.params.id;
+    console.log('USERID : ',userId);
+    User.find({_id:userId}).then((response)=>{
+            console.log('USER',response);
+        Order.find({user:response._id}).populate('user').then((orders) => {
+            console.log('orders',orders);
+            res.status(200).send(orders);
+        })
+    }).catch((err)=>{
+        console.log('error',err);
+        res.send(err);
+    })
+    
 }
 
 

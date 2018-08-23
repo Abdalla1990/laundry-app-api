@@ -61,7 +61,7 @@ app.delete('/admin/delete/:email' , admin_routes.deleteAdmin);
 //=============== Order routes =======================
 app.post('/orders/create-order', order_routes.create_order);
 app.post('/orders/update-order', order_routes.update_order);
-app.get('/orders/get-orders',order_routes.display_orders);
+app.get('/orders/get-orders/:id',order_routes.display_orders);
 app.delete('/orders/remove-orders',authenticate,order_routes.remove_orders);
 app.listen(port, () => {
     console.log(`started up at port :${port}`)
