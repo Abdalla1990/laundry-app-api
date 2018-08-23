@@ -64,6 +64,19 @@ var display_orders = (req, res) => {
     
 }
 
+var get_orders = (req, res) => {
+   
+    
+    Order.find().populate('user').then((orders) => {
+        console.log('orders',orders);
+        res.status(200).send(orders);
+    }).catch((err)=>{
+        console.log('error',err);
+        res.send(err);
+    })
+    
+}
+
 
 
 var update_order = (req, res) => {
@@ -172,6 +185,7 @@ var remove_orders = (req,res)=>{
 module.exports = {
     create_order,
     display_orders,
+    get_orders,
     update_order,
     get_order,
     remove_orders
