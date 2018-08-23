@@ -54,7 +54,7 @@ var create_order = (req, res) => {
 var display_orders = (req, res) => {
     var userId = req.params.id;
     console.log('USERID : ',userId);
-    Order.find({user:userId}).then((orders) => {
+    Order.find({user:userId}).populate('user').then((orders) => {
         console.log('orders',orders);
         res.status(200).send(orders);
     }).catch((err)=>{
